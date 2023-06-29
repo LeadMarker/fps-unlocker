@@ -13,10 +13,10 @@ system('title ' + 'Made by @leadmarker and @afyzone')
 for filename in os.listdir(roblox_directory):
     f = os.path.join(roblox_directory, filename)
     final = f + '\ClientSettings'
-    if not os.path.exists(final):
+    if not os.path.exists(final) and os.path.isdir(final):
         os.makedirs(final)
 
-    if not os.path.exists(final + '/ClientAppSettings.json'):
+    if os.path.isdir(final) and not os.path.exists(final + '/ClientAppSettings.json'):
         r = requests.get(url = JSON_FILE)
         if r.status_code == 200:
             with open(final + '/ClientAppSettings.json', 'wb') as file:
