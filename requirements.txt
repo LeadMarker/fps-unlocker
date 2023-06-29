@@ -1,1 +1,4 @@
 colorama
+os
+requests
+getpass
