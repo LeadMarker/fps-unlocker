@@ -1,23 +1,18 @@
-import colorama
-from colorama import init, Fore, Back, Style
+from colorama import Fore
 import os
 import requests
 import getpass
-from os import system
 
-roblox_directory = 'C:\\Users\\' + os.getlogin() + '\\AppData\\Local\\Roblox\\Versions'
+roblox_directory = os.path.isdir('C:\\Users\\' + os.getlogin() + '\\AppData\\Local\\Roblox') and os.path.isdir('C:\\Users\\' + os.getlogin() + '\\AppData\\Local\\Roblox\\Versions') and 'C:\\Users\\' + os.getlogin() + '\\AppData\\Local\\Roblox\\Versions' or os.path.isdir('C:\\Program Files (x86)\\Roblox') and os.path.isdir('C:\\Program Files (x86)\\Roblox\\Versions') and 'C:\\Program Files (x86)\\Roblox\\Versions'
 JSON_FILE = 'https://raw.githubusercontent.com/LeadMarker/fps-unlocker/main/dependencies/ClientAppSettings.json'
 
-system('title ' + 'Made by @leadmarker and @afyzone')
+os.system('title ' + 'Made by @leadmarker and @afyzone')
 
 for filename in os.listdir(roblox_directory):
-    f = os.path.join(roblox_directory, filename)
-    final = f + '\ClientSettings'
+    final = os.path.join(roblox_directory, filename) + '\ClientSettings'
     
-    if not os.path.isdir(f): continue
-    
-    if not os.path.exists(final):
-        os.makedirs(final)
+    if not os.path.isdir(os.path.join(roblox_directory, filename)): continue
+    if not os.path.exists(final): os.makedirs(final)
 
     if not os.path.exists(final + '/ClientAppSettings.json'):
         r = requests.get(url = JSON_FILE)
@@ -32,4 +27,4 @@ for filename in os.listdir(roblox_directory):
         print(Fore.BLUE + 'INFO: FPS already unlocked for this version!')
 
 getpass.getpass(Fore.YELLOW + 'Press Enter key to exit!')
-system("exit")
+os.system("exit")
